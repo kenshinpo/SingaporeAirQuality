@@ -25,7 +25,6 @@ public class AppApplication extends Application {
 
     private IDataGovSgService dataGovSgService;
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,11 +32,12 @@ public class AppApplication extends Application {
         //region Step 1. Initial settings
         Timber.plant(new Timber.DebugTree());
         instance = this;
+        Settings.setBaseUrl(Settings.DEFAULT_BASE_URL);
         //endregion
 
         //region Step 2. Initial Http call setting
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.data.gov.sg/v1/environment/")
+                .baseUrl(Settings.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         dataGovSgService = retrofit.create(IDataGovSgService.class);
