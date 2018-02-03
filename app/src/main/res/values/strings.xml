@@ -3,4 +3,5 @@
 
     <string name="text_Loading">Loading</string>
     <string name="text_Wait_while_loading">Wait while loading...</string>
+    <string name="text_Update">Update</string>
 </resources>

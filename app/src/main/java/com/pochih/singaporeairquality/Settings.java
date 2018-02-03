@@ -26,7 +26,6 @@ public class Settings {
     public static final String READING_O3_8HR_MAX = "o3_eight_hour_max";
     public static final String READING_PSI_3Hourly = "psi_three_hourly";
 
-
     public static final String DEFAULT_BASE_URL = "https://api.data.gov.sg/v1/environment/";
 
     public static String getBaseUrl() {
