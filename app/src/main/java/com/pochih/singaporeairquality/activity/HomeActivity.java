@@ -1,7 +1,9 @@
 package com.pochih.singaporeairquality.activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -40,7 +42,24 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     TextView tvUpdateDateTime;
     @BindView(R.id.ibRefresh)
     ImageButton ibRefresh;
+    @BindView(R.id.ibChoose)
+    ImageButton ibChoose;
 
+    AlertDialog.Builder dialog;
+    final String[] airItems = {
+            "PSI - 24 hourly"
+            , "PM 2.5 - 24 hourly"
+            , "PM 2.5 - sub index"
+            , "PM 10 - 24 hourly"
+            , "PM 10 - sub index"
+            , "SO2 - 24 hourly"
+            , "SO2 - sub index"
+            , "CO - 8hr max"
+            , "CO - sub index"
+            , "O3 - 8hr max"
+            , "O3 - sub index"
+            , "NO2 - 1hr max"
+    };
 
     private Call<PsiResponse> httpCall;
 
@@ -96,6 +115,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (regions.get(i).getLatitude() != 0.0 && regions.get(i).getLongitude() != 0.0) {
                     LatLng latLng = new LatLng(regions.get(i).getLatitude(), regions.get(i).getLongitude());
                     MarkerOptions mo = new MarkerOptions();
+                    mo.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     mo.position(latLng).title(regions.get(i).getName().toUpperCase());
                     if (Settings.getReading().equals(Settings.READING_O3_SUB_INDEX)) {
                         mo.snippet("O3 sub index: " + regions.get(i).getReadings().get(0).getO3_SubIndex());
@@ -164,8 +184,73 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @OnClick(R.id.ibRefresh)
-    public void onViewClicked(View view) {
+    public void ibRefreshOnClick(View view) {
         apiCallGetPsi();
+    }
+
+    @OnClick(R.id.ibChoose)
+    public void ibChooseOnClick(View view) {
+
+
+        try {
+            //region Show dialog for choosing item
+            dialog = new AlertDialog.Builder(HomeActivity.this);
+            dialog.setTitle(getString(R.string.text_Choose_item));
+            dialog.setItems(airItems, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which) {
+                        case 0:
+                            Settings.setReading(Settings.READING_PSI_24HOURLY);
+                            break;
+                        case 1:
+                            Settings.setReading(Settings.READING_PM25_24HOURLY);
+                            break;
+                        case 2:
+                            Settings.setReading(Settings.READING_PM25_SUB_INDEX);
+                            break;
+                        case 3:
+                            Settings.setReading(Settings.READING_PM10_24HOURLY);
+                            break;
+                        case 4:
+                            Settings.setReading(Settings.READING_PM10_SUB_INDEX);
+                            break;
+                        case 5:
+                            Settings.setReading(Settings.READING_SO2_24HOURLY);
+                            break;
+                        case 6:
+                            Settings.setReading(Settings.READING_SO2_SUB_INDEX);
+                            break;
+                        case 7:
+                            Settings.setReading(Settings.READING_CO_8HR_MAX);
+                            break;
+                        case 8:
+                            Settings.setReading(Settings.READING_CO_SUB_INDEX);
+                            break;
+                        case 9:
+                            Settings.setReading(Settings.READING_O3_8HR_MAX);
+                            break;
+                        case 10:
+                            Settings.setReading(Settings.READING_O3_SUB_INDEX);
+                            break;
+                        case 11:
+                            Settings.setReading(Settings.READING_NO2_1HR_MAX);
+                            break;
+
+                        default:
+                            Settings.setReading(Settings.READING_PSI_24HOURLY);
+                            break;
+                    }
+
+                    mapFragment.getMapAsync(HomeActivity.this);
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+            //endregion
+        } catch (Exception e) {
+            Timber.e(e);
+        }
     }
 
     private void apiCallGetPsi() {
