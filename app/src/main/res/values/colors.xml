@@ -8,4 +8,17 @@
     <color name="colorGray">#CABBBBBB</color>
 
     <color name="color_bg_map_text">#AA000000</color>
+
+    <color name="color_O3_SubIndex">#F9E803</color>
+    <color name="color_PM10_24Hourly">#FC0101</color>
+    <color name="color_PM10_SubIndex">#52E30A</color>
+    <color name="color_Co_SubIndex">#034DFA</color>
+    <color name="color_Pm25_24Hourly">#F802BA</color>
+    <color name="color_So2_SubIndex">#2BAE3E</color>
+    <color name="color_Co_8HrMax">#05C4F4</color>
+    <color name="color_No2_1HrMax">#F48A0A</color>
+    <color name="color_So2_24Hourly">#AA07E1</color>
+    <color name="color_PM25_SubIndex">#986BD8</color>
+    <color name="color_Psi_24Hourly">#A4D6DC</color>
+    <color name="color_O3_8HrMax">#CF766D</color>
 </resources>

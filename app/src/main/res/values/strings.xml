@@ -5,4 +5,12 @@
     <string name="text_Wait_while_loading">Wait while loading...</string>
     <string name="text_Update">Update</string>
     <string name="text_Choose_item">Choose item</string>
+
+    <string-array name="areas">
+        <item>East</item>
+        <item>South</item>
+        <item>West</item>
+        <item>North</item>
+        <item>Central</item>
+    </string-array>
 </resources>

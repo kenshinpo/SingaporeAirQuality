@@ -2,6 +2,7 @@ package com.pochih.singaporeairquality.activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pochih.singaporeairquality.AppApplication;
 import com.pochih.singaporeairquality.R;
@@ -36,7 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
-public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     @BindView(R.id.tvUpdateDateTime)
     TextView tvUpdateDateTime;
@@ -172,12 +174,21 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
                 tvUpdateDateTime.setText(getString(R.string.text_Update) + ": " + sdf.format(regions.get(0).getReadings().get(0).getUpdatedTimestamp()));
+
+                mMap.setOnInfoWindowClickListener(this);
             } else {
                 Toast.makeText(getApplicationContext(), "Please check your network", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             Timber.e(e);
         }
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Intent intent = new Intent(HomeActivity.this, DashboardActivity.class);
+        intent.putExtra("AREA", marker.getTitle());
+        startActivity(intent);
     }
 
     @OnClick(R.id.ibRefresh)

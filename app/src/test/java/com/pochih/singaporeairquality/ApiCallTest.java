@@ -31,7 +31,7 @@ public class ApiCallTest {
     }
 
     @Test
-    public void getPsi() {
+    public void getPsiTest() {
         Call<PsiResponse> httpCall = dataGovSgService.getPsi();
         httpCall.enqueue(new Callback<PsiResponse>() {
             @Override
@@ -47,4 +47,20 @@ public class ApiCallTest {
         });
     }
 
+    @Test
+    public void getPsiWithArgTest() {
+        Call<PsiResponse> httpCall = dataGovSgService.getPsi("2018-02-01");
+        httpCall.enqueue(new Callback<PsiResponse>() {
+            @Override
+            public void onResponse(Call<PsiResponse> call, Response<PsiResponse> response) {
+                PsiResponse actual = response.body();
+                MatcherAssert.assertThat(actual.getRegion_metadata(), Matchers.hasSize(6));
+                MatcherAssert.assertThat(actual.getItems(), Matchers.hasSize(23));
+            }
+
+            @Override
+            public void onFailure(Call<PsiResponse> call, Throwable t) {
+            }
+        });
+    }
 }

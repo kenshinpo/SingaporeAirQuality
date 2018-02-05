@@ -57,22 +57,22 @@ public class PsiResponse {
         }
 
         public class Location {
-            private double latitude;
-            private double longitude;
+            private float latitude;
+            private float longitude;
 
-            public double getLatitude() {
+            public float getLatitude() {
                 return latitude;
             }
 
-            public void setLatitude(double latitude) {
+            public void setLatitude(float latitude) {
                 this.latitude = latitude;
             }
 
-            public double getLongitude() {
+            public float getLongitude() {
                 return longitude;
             }
 
-            public void setLongitude(double longitude) {
+            public void setLongitude(float longitude) {
                 this.longitude = longitude;
             }
         }
@@ -227,58 +227,58 @@ public class PsiResponse {
             }
 
             public class Reading {
-                private double east;
-                private double central;
-                private double south;
-                private double north;
-                private double west;
-                private double national;
+                private float east;
+                private float central;
+                private float south;
+                private float north;
+                private float west;
+                private float national;
 
-                public double getEast() {
+                public float getEast() {
                     return east;
                 }
 
-                public void setEast(double east) {
+                public void setEast(float east) {
                     this.east = east;
                 }
 
-                public double getCentral() {
+                public float getCentral() {
                     return central;
                 }
 
-                public void setCentral(double central) {
+                public void setCentral(float central) {
                     this.central = central;
                 }
 
-                public double getSouth() {
+                public float getSouth() {
                     return south;
                 }
 
-                public void setSouth(double south) {
+                public void setSouth(float south) {
                     this.south = south;
                 }
 
-                public double getNorth() {
+                public float getNorth() {
                     return north;
                 }
 
-                public void setNorth(double north) {
+                public void setNorth(float north) {
                     this.north = north;
                 }
 
-                public double getWest() {
+                public float getWest() {
                     return west;
                 }
 
-                public void setWest(double west) {
+                public void setWest(float west) {
                     this.west = west;
                 }
 
-                public double getNational() {
+                public float getNational() {
                     return national;
                 }
 
-                public void setNational(double national) {
+                public void setNational(float national) {
                     this.national = national;
                 }
             }

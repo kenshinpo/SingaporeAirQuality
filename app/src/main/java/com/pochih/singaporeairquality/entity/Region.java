@@ -8,14 +8,14 @@ import java.util.List;
 
 public class Region {
     private String name;
-    private double latitude;
-    private double longitude;
+    private float latitude;
+    private float longitude;
     private List<Reading> readings;
 
     public Region() {
     }
 
-    public Region(String name, double latitude, double longitude) {
+    public Region(String name, float latitude, float longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -29,19 +29,19 @@ public class Region {
         this.name = name;
     }
 
-    public double getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
 
